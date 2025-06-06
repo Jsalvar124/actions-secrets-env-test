@@ -11,6 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # Secrets are printed as *** by github, so no problem.
       - name: print-secret
         run: echo "${{ secrets.TOKEN }}"
+      
+        # Environment variables are public, can be accessed from github or printed.
+      - name: print-env
+        run: echo "${{ env.NODE_ENV }}"
 
