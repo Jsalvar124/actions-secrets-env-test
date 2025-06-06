@@ -13,6 +13,8 @@ describe('GET /', () => {
 describe('GET /nonexistentendpoint', () => {
   it('should return 404 for unknown routes', async () => {
     const res = await request(app).get('/nonexistentendpoint');
-    expect(res.statusCode).toBe(304); // 304 fails test
+    // expect(res.statusCode).toBe(304); // 304 fails 
+    expect(res.statusCode).toBe(404);
+
   });
 });
