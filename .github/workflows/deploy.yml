@@ -39,7 +39,7 @@ jobs:
       # In order to build the project, we can use a github action, that installs the dependencies on our ubuntu instance to for example, run the tests.
       - name: node-setup
         # Keyword to use and action is uses, actionsRepository / action-name @ version
-        uses: actions/node-setup@v4
+        uses: actions/setup-node@v4
         with: 
           node-version: '18'
 
