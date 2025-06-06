@@ -12,6 +12,5 @@ jobs:
 
     steps:
       - name: print-secret
-        run: echo "Secret Token"
         run: echo "${{ secrets.TOKEN }}"
 
