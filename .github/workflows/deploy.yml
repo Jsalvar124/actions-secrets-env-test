@@ -7,7 +7,7 @@ on:
     - dev
 
 jobs:
-  first_job:
+  build:
     runs-on: ubuntu-latest
     # Environment variables should be declared, if there are multiple jobs, on each job!
     env:
@@ -56,3 +56,14 @@ jobs:
 
       - name: Step after test
         run: echo "if test fails, i should not be here."
+
+  deploy:
+    runs-on: ubuntu-latest
+    # needs keyword is what allows the pipeline, deploy job only begins if build job is successful.
+    needs: build
+    steps:
+    - name: Deploy
+      run: echo "Deploying..........."
+
+    - name: End
+      run: echo "Finish Deploy........"
