@@ -13,12 +13,33 @@ jobs:
     env:
       NODE_ENV: ${{ vars.NODE_ENV }}
 
+    # Services, are docker containers that handle premaid solutions for database management or other common stuff. 
+    services:
+      redis:
+        image: redis
+        ports:
+        - 6379:6379
+
     steps:
-    # Secrets are printed as *** by github, so no problem.
+      # Secrets are printed as *** by github, so no problem.
       - name: print-secret
         run: echo "${{ secrets.TOKEN }}"
       
-        # Environment variables are public, can be accessed from github or printed.
+      # Environment variables are public, can be accessed from github or printed.
       - name: print-env
         run: echo "${{ env.NODE_ENV }}"
+
+      # We can access the virtual machine and install elements manually using bash commands. 
+      - name: instal redis-cli
+        run: sudo apt-get update -y && sudo apt-get install redis-tools -y
+      
+      - name: test redis connection
+        run: redis-cli -h localhost -p 6379 ping
+
+      # In order to build the project, we can use a github action, that installs the dependencies on our ubuntu instance to for example, run the tests.
+      - name: node-setup
+        # Keyword to use and action is uses, actionsRepository / action-name @ version
+        uses: actions/node-setup@v4
+        with: 
+          node-version: '18'
 
