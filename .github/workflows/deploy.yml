@@ -1,0 +1,16 @@
+name: Deploy to github pages
+
+on: 
+  push: 
+    branches: 
+    - main
+    - dev
+
+jobs:
+  first_job:
+    runs-on: ubuntu-latest
+
+    steps:
+      name: print-secret
+      # run: echo "${{secrets.TOKEN}}" 
+      run: echo "First Commit" 
