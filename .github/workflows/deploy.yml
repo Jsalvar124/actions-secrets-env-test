@@ -12,4 +12,6 @@ jobs:
 
     steps:
       - name: print-secret
-        run: echo "First Commit"
+        run: echo "Secret Token"
+        run: echo "${{ secrets.TOKEN }}"
+
