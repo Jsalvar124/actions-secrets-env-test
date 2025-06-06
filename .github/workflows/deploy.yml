@@ -30,7 +30,7 @@ jobs:
         run: echo "${{ env.NODE_ENV }}"
 
       # We can access the virtual machine and install elements manually using bash commands. 
-      - name: instal redis-cli
+      - name: install redis-cli
         run: sudo apt-get update -y && sudo apt-get install redis-tools -y
       
       - name: test redis connection
@@ -54,8 +54,15 @@ jobs:
       - name: Run tests
         run: npm run test
 
-      - name: Step after test
-        run: echo "if test fails, i should not be here."
+      # Build the application
+      - name: Run Build
+        run: npm run build
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Artifact after build is created in public folder this is what github pages uses for deployment.
+          path: public/ 
 
   deploy:
     runs-on: ubuntu-latest
@@ -66,7 +73,7 @@ jobs:
       pages: write
       id-token: write
     
-    env:
+    environment:
       name: github-pages
       url: ${{ steps.deployment-pages.outputs.page_url }}
 
