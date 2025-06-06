@@ -9,6 +9,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+       node: [18, 20]
     # Environment variables should be declared, if there are multiple jobs, on each job!
     env:
       NODE_ENV: ${{ vars.NODE_ENV }}
@@ -41,7 +45,7 @@ jobs:
         # Keyword to use and action is uses, actionsRepository / action-name @ version
         uses: actions/setup-node@v4
         with: 
-          node-version: '18'
+          node-version: ${{ matrix.node }}
 
       # Checkout, copies the application folder and locates the bash terminal on the root. 
       - name: Checkout
@@ -59,6 +63,7 @@ jobs:
         run: npm run build
 
       - name: Upload Artifact
+        if: ${{ matrix.node == 18 }} # Upload only one Artifact.
         uses: actions/upload-pages-artifact@v3
         with:
           # Artifact after build is created in public folder this is what github pages uses for deployment.
