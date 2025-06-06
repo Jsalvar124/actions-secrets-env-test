@@ -8,3 +8,11 @@ describe('GET /', () => {
     expect(res.text).toContain('Bootcamp de GitHub Action en Código Facilito');
   });
 });
+
+
+describe('GET /nonexistentendpoint', () => {
+  it('should return 404 for unknown routes', async () => {
+    const res = await request(app).get('/nonexistentendpoint');
+    expect(res.statusCode).toBe(404);
+  });
+});

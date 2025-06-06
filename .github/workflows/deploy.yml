@@ -25,7 +25,7 @@ jobs:
       - name: print-secret
         run: echo "${{ secrets.TOKEN }}"
       
-      # Environment variables are public, can be accessed from github or printed.
+      # Environment variables are public, can be accessed from github or printed, they need to be declared on each job from the object vars
       - name: print-env
         run: echo "${{ env.NODE_ENV }}"
 
@@ -36,7 +36,7 @@ jobs:
       - name: test redis connection
         run: redis-cli -h localhost -p 6379 ping
 
-      # In order to build the project, we can use a github action, that installs the dependencies on our ubuntu instance to for example, run the tests.
+      # In order to build the project, we can use a github action, that installs the dependencies necesary to run the application, in this case node.js
       - name: node-setup
         # Keyword to use and action is uses, actionsRepository / action-name @ version
         uses: actions/setup-node@v4
@@ -51,3 +51,5 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Run tests
+        run: npm run test
