@@ -9,6 +9,9 @@ on:
 jobs:
   first_job:
     runs-on: ubuntu-latest
+    # Environment variables should be declared, if there are multiple jobs, on each job!
+    env:
+      NODE_ENV: ${{ vars.NODE_ENV }}
 
     steps:
     # Secrets are printed as *** by github, so no problem.
