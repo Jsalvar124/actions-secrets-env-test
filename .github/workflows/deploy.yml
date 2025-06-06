@@ -58,6 +58,7 @@ jobs:
         run: echo "if test fails, i should not be here."
 
   deploy:
+    if: ${{ always()}} # This forces the execution of the job, even if the previous job fails, we also have success(), and failure()
     runs-on: ubuntu-latest
     # needs keyword is what allows the pipeline, deploy job only begins if build job is successful.
     needs: build
