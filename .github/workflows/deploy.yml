@@ -43,3 +43,11 @@ jobs:
         with: 
           node-version: '18'
 
+      # Checkout, copies the application folder and locates the bash terminal on the root. 
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Then, we since we already installed node, and have our application, we can install dependencies and run tests.
+      - name: Install dependencies
+        run: npm install
+
