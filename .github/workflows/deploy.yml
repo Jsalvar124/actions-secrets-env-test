@@ -11,6 +11,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      name: print-secret
-      # run: echo "${{secrets.TOKEN}}" 
-      run: echo "First Commit" 
+      - name: print-secret
+        run: echo "First Commit"
