@@ -53,3 +53,6 @@ jobs:
 
       - name: Run tests
         run: npm run test
+
+      - name: Step after test
+        run: echo "if test fails, i should not be here."
